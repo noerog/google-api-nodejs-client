@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/googleapis?activeTab=versions
 
+### [40.0.1](https://www.github.com/googleapis/google-api-nodejs-client/compare/v40.0.0...v40.0.1) (2019-06-14)
+
+
+### Bug Fixes
+
+* **docs:** move to new client docs URL ([#1734](https://www.github.com/googleapis/google-api-nodejs-client/issues/1734)) ([4df71ed](https://www.github.com/googleapis/google-api-nodejs-client/commit/4df71ed))
+
 ## [40.0.0](https://www.github.com/googleapis/google-api-nodejs-client/compare/v39.2.0...v40.0.0) (2019-05-13)
 
 
