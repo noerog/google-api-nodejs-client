@@ -23,24 +23,34 @@ const docs = google.docs({
 });
 
 async function runSample() {
-  const res = await docs.documents.create({
+  // The initial call to create the doc will have a title but no content.
+  // This is a limitation of the underlying API.
+  const createResponse = await docs.documents.create({
     requestBody: {
       title: 'Your new document!',
-      body: {
-        content: [{
-          paragraph: {
-            elements: [{
-              textRun: {
-                content: 'Well hello there!'
-              }
-            }]
-          }
-        }]
-      }
     },
   });
-  console.log(res.data);
-  return res.data;
+  console.log(createResponse.data);
+
+  // now that we created the doc, let's add content using the 
+  // documentId returned from the create call.
+  const updateResponse = await docs.documents.batchUpdate({
+    documentId: createResponse.data.documentId,
+    requestBody: {
+      requests: [{
+        insertText: {
+          // The first text inserted into the document must create a paragraph,
+          // which can't be done with the `location` property.  Use the 
+          // `endOfSegmentLocation` instead, which assumes the Body if 
+          // unspecified.
+          endOfSegmentLocation: {},
+          text: 'Hello there!'
+        }
+      }]
+    }
+  });
+  console.log(updateResponse.data);
+  return updateResponse.data;
 }
 
 const scopes = [
